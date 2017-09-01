@@ -1,7 +1,7 @@
 {
   "name": "mw-dict",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "lib/index.js",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.16.2",
