@@ -14,18 +14,21 @@ const COLLEGIATE_URL = 'http://www.dictionaryapi.com/api/v1/references/collegiat
 const parser = new Parser({ explicitArray: false })
 const parseAsync = promisify(parser.parseString)
 
-function get_definition(texts=[], numbers=[]) {
+function get_definition(texts=[], numbers=[], statuses=[]) {
   // TODO: add sn(sense number)
   // TODO: export markdown for <it> <bold> <sup> etc.
   // TODO: handle <un> usage note, <ca> called also
   texts = isArray(texts)? texts: [texts]
   numbers = isArray(numbers)? numbers: [numbers]
+  statuses = isArray(statuses)? statuses: [statuses]
   return texts.map((def, i) => {
     let sense_number = numbers[i] || ''
+    let status = statuses[i] || ''
     if (isString(def)) {
       // return `${sense_number}${def}`
       return new Definition({
         sense_number,
+        status,
         meaning: def
       }).format()
     }
@@ -41,6 +44,7 @@ function get_definition(texts=[], numbers=[]) {
       }
       return new Definition({
         sense_number,
+        status,
         meaning,
         verbal_illustration,
         synonymous
@@ -50,8 +54,9 @@ function get_definition(texts=[], numbers=[]) {
 }
 
 class Definition {
-  constructor({sense_number, meaning, verbal_illustration, synonymous}) {
+  constructor({sense_number, status, meaning, verbal_illustration, synonymous}) {
     this.sense_number = sense_number
+    this.status = status
     this.meaning = meaning
     this.verbal_illustration = verbal_illustration
     this.synonymous = synonymous
@@ -65,6 +70,12 @@ class Definition {
         // TODO: handle <snp> etc.
       }
       console.log(sense_number)
+    }
+    return ''
+  }
+  _normalizeSsl(status) {
+    if (status) {
+      return `[${status}]`
     }
     return ''
   }
@@ -111,6 +122,7 @@ class Definition {
   }
   format() {
     return [this._normalizeSn(this.sense_number),
+            this._normalizeSsl(this.status),
             this._normalizeDt(this.meaning),
             this._normalizeSx(this.synonymous),
             this._normalizeVi(this.verbal_illustration)
@@ -142,7 +154,7 @@ class CollegiateDictionary {
           return {
             word,
             functional_label,
-            definition: get_definition(def.dt, def.sn)
+            definition: get_definition(def.dt, def.sn, def.ssl)
           }
         })
       })
