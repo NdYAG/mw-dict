@@ -1,3 +1,9 @@
+/*
+  Exmaples:
+  node demo/index.js path
+  node demo/index.js 'glide path'
+ */
+
 const { inspect } = require('util')
 const { CollegiateDictionary } = require('../')
 const API_KEY = require('./config')
