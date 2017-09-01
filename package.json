@@ -1,0 +1,14 @@
+{
+  "name": "mw-dict",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "lodash": "^4.17.4",
+    "xml2js": "^0.4.19"
+  },
+  "devDependencies": {
+    "yargs": "^8.0.2"
+  }
+}
