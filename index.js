@@ -14,29 +14,37 @@ const COLLEGIATE_URL = 'http://www.dictionaryapi.com/api/v1/references/collegiat
 const parser = new Parser({ explicitArray: false })
 const parseAsync = promisify(parser.parseString)
 
-function get_definition(defs, numbers) {
+function get_definition(texts=[], numbers=[]) {
   // TODO: add sn(sense number)
   // TODO: export markdown for <it> <bold> <sup> etc.
   // TODO: handle <un> usage note, <ca> called also
-  defs = isArray(defs)? defs: [defs]
+  texts = isArray(texts)? texts: [texts]
   numbers = isArray(numbers)? numbers: [numbers]
-  return defs.map((def, i) => {
-    let sense_number = numbers[i]
+  return texts.map((def, i) => {
+    let sense_number = numbers[i] || ''
     if (isString(def)) {
-      return `${sense_number}${def}`
+      // return `${sense_number}${def}`
+      return new Definition({
+        sense_number,
+        meaning: def
+      }).format()
     }
     if (isPlainObject(def)) {
-      let { _: meaning, sx: synonymous, vi: verbal_illustration, d_link } = def
+      let { _: meaning, sx: synonymous, vi: verbal_illustration, d_link, fw } = def
       // TODO: i_link, dx_ety
       if (d_link) {
         meaning = complete(meaning, d_link)
+      }
+      // references
+      if (!synonymous) {
+        synonymous = fw // fw: abbreviation word expansion
       }
       return new Definition({
         sense_number,
         meaning,
         verbal_illustration,
         synonymous
-      })
+      }).format()
     }
   })
 }
@@ -49,6 +57,15 @@ class Definition {
     this.synonymous = synonymous
   }
   _normalizeSn(sense_number) {
+    if (sense_number) {
+      if (isString(sense_number)) {
+        return sense_number
+      }
+      if (isPlainObject) {
+        // TODO: handle <snp> etc.
+      }
+      console.log(sense_number)
+    }
     return ''
   }
   _normalizeSx(synonymous) {
@@ -64,6 +81,9 @@ class Definition {
       return syns.join(', ')
     }
     return ''
+  }
+  _normalizeDt(meaning) {
+    return meaning.replace(/^(\s*):([^\s])/, (_, m1, m2) => `: ${m2}`)
   }
   _normalizeVi(verbal_illustration) {
     if (verbal_illustration) {
@@ -91,9 +111,13 @@ class Definition {
   }
   format() {
     return [this._normalizeSn(this.sense_number),
-            this.meaning,
-            this._normalizeVi(this.verbal_illustration),
-            this._normalizeSn(this.synonymous)].join('')
+            this._normalizeDt(this.meaning),
+            this._normalizeSx(this.synonymous),
+            this._normalizeVi(this.verbal_illustration)
+           ]
+      .map(s => s.trim())
+      .filter(s => !!s.length)
+      .join(' ')
   }
 }
 
@@ -111,13 +135,14 @@ class CollegiateDictionary {
       .then(resp => resp.data)
       .then(parseAsync)
       .then(({entry_list}) => {
+        console.log(inspect(entry_list, false, null))
         let entries = isArray(entry_list.entry)? entry_list.entry: [entry_list.entry]
         return entries.map((entry) => {
-          const { ew: word, fl: functional_label, def, sn } = entry
+          const { ew: word, fl: functional_label, def } = entry
           return {
             word,
             functional_label,
-            definition: get_definition(def, sn)
+            definition: get_definition(def.dt, def.sn)
           }
         })
       })
