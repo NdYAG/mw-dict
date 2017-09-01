@@ -12,6 +12,9 @@ function complete(meaning, fragments, illustrations) {
     // TODO: are there \s; \s: etc ?
     result = result.replace(/^\s|\s$|\s\s|\s,/g, (match, pos) => {
       let fragment = fragments.shift()
+      if (!fragment) {
+        return ''
+      }
       if (match.length === 1) {
         if (pos) { // \s$
           return ` ${fragment}`
