@@ -6,10 +6,9 @@ const API_KEY = require('./config')
 const dict = new CollegiateDictionary(key = API_KEY)
 
 function renderDefinition(senses) {
-    return senses.map(({ number, status, meanings, synonyms, illustrations, senses }) => `
+    return senses.map(({ number, meanings, synonyms, illustrations, senses }) => `
 <li>
     ${number ? ('<strong>' + number + '</strong>') : ''}
-    ${status ? ('<i>' + status + '</i>') : ''}
     ${meanings && meanings.length ? meanings.join('') : ''}
     ${synonyms && synonyms.length ? synonyms.map(s => '<a>' + s + '</a>').join(', ') : ''}
     ${illustrations && illustrations.length ? ('<ul>' + illustrations.map(i => '<li>' + i + '</li>').join('\n') + '</ul>') : ''}
