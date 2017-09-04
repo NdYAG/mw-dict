@@ -9,10 +9,11 @@
   "dependencies": {
     "axios": "^0.16.2",
     "lodash": "^4.17.4",
-    "xml2js": "^0.4.19"
+    "xmldom": "^0.1.27"
   },
   "devDependencies": {
     "jest": "^20.0.4",
+    "micro": "^8.0.4",
     "yargs": "^8.0.2"
   }
 }
