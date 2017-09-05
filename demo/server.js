@@ -9,7 +9,7 @@ function renderDefinition(senses) {
     return senses.map(({ number, meanings, synonyms, illustrations, senses }) => `
 <li>
     ${number ? ('<strong>' + number + '</strong>') : ''}
-    ${meanings && meanings.length ? meanings.join('') : ''}
+    ${meanings && meanings.length ? meanings.join(' ') : ''}
     ${synonyms && synonyms.length ? synonyms.map(s => '<a>' + s + '</a>').join(', ') : ''}
     ${illustrations && illustrations.length ? ('<ul>' + illustrations.map(i => '<li>' + i + '</li>').join('\n') + '</ul>') : ''}
     ${senses && senses.length ? ('<ol>' + renderDefinition(senses) + '</ol>') : ''}
