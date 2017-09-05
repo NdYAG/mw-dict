@@ -1,4 +1,4 @@
-const { CollegiateDictionary } = require('../')
+const { CollegiateDictionary, WordNotFoundError } = require('../')
 
 const dict = new CollegiateDictionary('')
 
@@ -49,6 +49,15 @@ describe('walking <dt> node', () => {
       let { definition } = results[0]
       let sense = definition[1]
       expect(sense.illustrations).toHaveLength(1)
+    })
+  })
+})
+
+describe('error handling', () => {
+  it('throws error when word could not be found', () => {
+    return dict.lookup('TEST_INEXIST').catch(e => {
+      expect(e).toBeInstanceOf(WordNotFoundError)
+      expect(e.suggestions).toBeInstanceOf(Array)
     })
   })
 })
