@@ -1,0 +1,15 @@
+<entry_list version="1.0">
+  <entry id="program">
+    <ew>program</ew>
+    <sound>
+      <wav>progra02.wav</wav>
+      <wpr>!prO-+gram</wpr>
+      <wav>progr01m.wav</wav>
+      <wpr>!prO-grum</wpr>
+      <wav>00fake.wav</wav>
+      <wav>ggfake.wav</wav>
+      <wav>bixfake.wav</wav>
+    </sound>
+    <fl>noun</fl>
+  </entry>
+</entry_list>

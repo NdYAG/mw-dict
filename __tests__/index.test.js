@@ -1,3 +1,4 @@
+const url = require('url')
 const { CollegiateDictionary, WordNotFoundError } = require('../')
 
 const dict = new CollegiateDictionary('')
@@ -8,6 +9,7 @@ describe('after fetching xml document from dictionaryapi.com', () => {
       expect(Object.keys(results[0])).toEqual([
         'word',
         'functional_label',
+        'pronunciation',
         'definition'
       ])
     })
@@ -58,6 +60,24 @@ describe('error handling', () => {
     return dict.lookup('TEST_INEXIST').catch(e => {
       expect(e).toBeInstanceOf(WordNotFoundError)
       expect(e.suggestions).toBeInstanceOf(Array)
+    })
+  })
+})
+
+describe('pronunciation', () => {
+  it('return sound url', () => {
+    return dict.lookup('TEST_SOUND').then(results => {
+      let { pronunciation } = results[0]
+      expect(pronunciation).toHaveLength(5)
+    })
+  })
+  it('extract correct subdirectory for sound url', () => {
+    return dict.lookup('TEST_SOUND').then(results => {
+      let { pronunciation } = results[0]
+      let subdirectories = pronunciation.map(p => {
+        return url.parse(p).pathname.split('/')[2]
+      })
+      expect(subdirectories).toEqual(['p', 'p', '00', 'gg', 'bix'])
     })
   })
 })

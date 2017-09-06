@@ -3,6 +3,7 @@
 **Node.js Wrapper for Merriam Webster Dictionary Developer API**
 
 * exports word senses with hierarchy (sense, subsense...)
+* outputs pronunciation url
 * cares about sense number, functional label, synonyms, verbal illustrations ...
 
 Preview:
@@ -36,8 +37,9 @@ dict
 // result: Definition[]
 // Definition
 {
-  word: String, 
+  word: String,
   functional_label: String,
+  pronunciation: String[],
   definition: Sense[]
 }
 // Sense
