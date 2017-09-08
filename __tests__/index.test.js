@@ -36,6 +36,13 @@ describe('walking <def> node', () => {
       expect(sense.meanings).toHaveLength(2)
     })
   })
+  it('adds status property to sense when xml has <ssl>', () => {
+    return dict.lookup('TEST_DEF_SSL').then(results => {
+      let { definition } = results[0]
+      let sense = definition[0]
+      expect(sense.status).toBeDefined()
+    })
+  })
 })
 
 describe('walking <dt> node', () => {
