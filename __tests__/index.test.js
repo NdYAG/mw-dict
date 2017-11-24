@@ -43,6 +43,12 @@ describe('walking <def> node', () => {
       expect(sense.status).toBeDefined()
     })
   })
+  it('build hierarchy for word senses', () => {
+    return dict.lookup('TEST_DEF_HIERARCHY').then(results => {
+      let { definition } = results[0]
+      expect(definition).toMatchSnapshot()
+    })
+  })
 })
 
 describe('walking <dt> node', () => {

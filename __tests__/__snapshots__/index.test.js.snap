@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`walking <def> node build hierarchy for word senses 1`] = `
+Array [
+  Sense {
+    "meanings": Array [
+      "SENSE 1",
+    ],
+    "number": "1",
+    "transitivity": undefined,
+  },
+  Sense {
+    "number": "2",
+    "senses": Array [
+      Sense {
+        "meanings": Array [
+          "SENSE 2 a",
+        ],
+        "number": "a",
+        "transitivity": undefined,
+      },
+      Sense {
+        "meanings": Array [
+          "SENSE 2 b",
+        ],
+        "number": "b",
+      },
+    ],
+  },
+  Sense {
+    "number": "3",
+    "senses": Array [
+      Sense {
+        "number": "a",
+        "senses": Array [
+          Sense {
+            "meanings": Array [
+              "SENSE 3 a (1)",
+            ],
+            "number": "(1)",
+            "transitivity": undefined,
+          },
+          Sense {
+            "meanings": Array [
+              "SENSE 3 a (2)",
+            ],
+            "number": "(2)",
+          },
+          Sense {
+            "meanings": Array [
+              "SENSE 3 a (3)",
+            ],
+            "number": "(3)",
+          },
+        ],
+      },
+      Sense {
+        "number": "b",
+        "senses": Array [
+          Sense {
+            "meanings": Array [
+              "SENSE 3 b (1)",
+            ],
+            "number": "(1)",
+          },
+          Sense {
+            "meanings": Array [
+              "SENSE 3 b (2)",
+            ],
+            "number": "(2)",
+          },
+          Sense {
+            "meanings": Array [
+              "SENSE 3 b (3)",
+            ],
+            "number": "(3)",
+          },
+        ],
+      },
+      Sense {
+        "meanings": Array [
+          "SENSE 3 c",
+        ],
+        "number": "c",
+      },
+    ],
+  },
+]
+`;

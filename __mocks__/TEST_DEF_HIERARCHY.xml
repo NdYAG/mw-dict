@@ -1,0 +1,28 @@
+<entry_list version="1.0">
+  <entry id="EXAMPLE">
+    <ew>EXAMPLE</ew>
+    <fl>noun</fl>
+    <def>
+      <sn>1</sn>
+      <dt>SENSE 1</dt>
+      <sn>2 a</sn>
+      <dt>SENSE 2 a</dt>
+      <sn>b</sn>
+      <dt>SENSE 2 b</dt>
+      <sn>3 a (1)</sn>
+      <dt>SENSE 3 a (1)</dt>
+      <sn>(2)</sn>
+      <dt>SENSE 3 a (2)</dt>
+      <sn>(3)</sn>
+      <dt>SENSE 3 a (3)</dt>
+      <sn>b (1)</sn>
+      <dt>SENSE 3 b (1)</dt>
+      <sn>(2)</sn>
+      <dt>SENSE 3 b (2)</dt>
+      <sn>(3)</sn>
+      <dt>SENSE 3 b (3)</dt>
+      <sn>c</sn>
+      <dt>SENSE 3 c</dt>
+    </def>
+  </entry>
+</entry_list>
