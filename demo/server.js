@@ -1,9 +1,11 @@
 const micro = require('micro')
 const { inspect } = require('util')
+const { parse: parseURL } = require('url')
 
-const { CollegiateDictionary } = require('../')
-const API_KEY = require('./config')
-const dict = new CollegiateDictionary((key = API_KEY))
+const { CollegiateDictionary, LearnersDictionary } = require('../')
+const { LEARNERS: LEARNERS_API_KEY, COLLEGIATE: COLLEGIATE_API_KAY } = require('./config')
+const collegiateDict = new CollegiateDictionary(key = COLLEGIATE_API_KAY)
+const learnersDict = new LearnersDictionary(key = LEARNERS_API_KEY)
 
 function renderDefinition(senses) {
   return senses
@@ -44,7 +46,9 @@ function render(definitions) {
 }
 
 const server = micro(async (req, res) => {
-  let matches = req.url.match(/\/word\/(.*)/)
+  let url = parseURL(req.url, true)
+  let matches = url.pathname.match(/\/word\/(.*)/)
+  let dict = url.query.type === 'learners'? learnersDict: collegiateDict
   if (matches) {
     let word = matches[1]
     const definitions = await dict.lookup(word)

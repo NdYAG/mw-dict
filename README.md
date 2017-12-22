@@ -2,9 +2,10 @@
 
 **Node.js Wrapper for Merriam Webster Dictionary Developer API**
 
-* exports word senses with hierarchy (sense, subsense...)
-* outputs pronunciation url
-* cares about sense number, functional label, synonyms, verbal illustrations ...
+* Supports **Collegiate® Dictionary** & **Learner's Dictionary**
+* Exports word senses with hierarchy (sense, subsense...)
+* Outputs pronunciation url
+* Cares about functional label, synonyms, verbal illustrations ...
 
 Preview:
 
@@ -21,9 +22,10 @@ npm install mw-dict
 ## usage
 
 ```js
-import { CollegiateDictionary } from 'mw-dict'
+import { CollegiateDictionary, LearnersDictionary } from 'mw-dict'
 
 const dict = new CollegiateDictionary(API_KEY)
+// const dict = new LearnersDictionary(API_KEY)
 
 dict
   .lookup(QUERY_WORD)
@@ -31,7 +33,7 @@ dict
   .catch(error => {})
 ```
 
-`result` format
+`result` interface
 
 ```js
 // result: Definition[]

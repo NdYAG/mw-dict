@@ -6,7 +6,7 @@
 
 const { inspect } = require('util')
 const { CollegiateDictionary } = require('../')
-const API_KEY = require('./config')
+const API_KEY = require('./config').COLLEGIATE
 
 const dict = new CollegiateDictionary((key = API_KEY))
 
