@@ -4,8 +4,9 @@
 
 * Supports **Collegiate® Dictionary** & **Learner's Dictionary**
 * Exports word senses with hierarchy (sense, subsense...)
-* Outputs pronunciation url
+* Outputs pronunciation audio url
 * Cares about functional label, synonyms, verbal illustrations ...
+* Outputs popularity
 
 Preview:
 
@@ -42,7 +43,8 @@ dict
   word: String,
   functional_label: String,
   pronunciation: String[],
-  definition: Sense[]
+  definition: Sense[],
+  popularity: String
 }
 // Sense
 {
