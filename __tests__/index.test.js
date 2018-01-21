@@ -10,6 +10,7 @@ describe('after fetching xml document from dictionaryapi.com', () => {
         'word',
         'functional_label',
         'pronunciation',
+        'etymology',
         'definition'
       ])
     })
@@ -78,19 +79,29 @@ describe('error handling', () => {
 })
 
 describe('pronunciation', () => {
-  it('return sound url', () => {
+  it('returns sound url', () => {
     return dict.lookup('TEST_SOUND').then(results => {
       let { pronunciation } = results[0]
       expect(pronunciation).toHaveLength(5)
     })
   })
-  it('extract correct subdirectory for sound url', () => {
+  it('extracts correct subdirectory for sound url', () => {
     return dict.lookup('TEST_SOUND').then(results => {
       let { pronunciation } = results[0]
       let subdirectories = pronunciation.map(p => {
         return url.parse(p).pathname.split('/')[2]
       })
       expect(subdirectories).toEqual(['p', 'p', '00', 'gg', 'bix'])
+    })
+  })
+})
+
+describe('etymology', () => {
+  it ('returns etymology', () => {
+    return dict.lookup('TEST_ETYMOLOGY').then(results => {
+      let { etymology } = results[0]
+      expect(etymology).toContain('Yiddish [beygl,] from Middle High German [*böugel] ring')
+      expect(etymology).not.toContain('bow')
     })
   })
 })
