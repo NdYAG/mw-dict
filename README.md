@@ -3,6 +3,7 @@
 **Node.js Wrapper for Merriam Webster Dictionary Developer API**
 
 * Supports **Collegiate® Dictionary** & **Learner's Dictionary**
+* Supports **Collegiate® Thesaurus**
 * Exports word senses with hierarchy (sense, subsense...)
 * Outputs pronunciation audio url
 * Cares about functional label, synonyms, verbal illustrations ...
@@ -51,6 +52,7 @@ dict
   number: String,
   meanings: String[],
   synonyms: String[],
+  antonyms: String[],
   illustrations: String[],
   senses: Sense[]
 }

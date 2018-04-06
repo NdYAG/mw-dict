@@ -2,10 +2,19 @@ const micro = require('micro')
 const { inspect } = require('util')
 const { parse: parseURL } = require('url')
 
-const { CollegiateDictionary, LearnersDictionary } = require('../')
-const { LEARNERS: LEARNERS_API_KEY, COLLEGIATE: COLLEGIATE_API_KAY } = require('./config')
-const collegiateDict = new CollegiateDictionary(key = COLLEGIATE_API_KAY)
-const learnersDict = new LearnersDictionary(key = LEARNERS_API_KEY)
+const {
+  CollegiateDictionary,
+  LearnersDictionary,
+  CollegiateThesaurus
+} = require('../')
+const {
+  LEARNERS: LEARNERS_API_KEY,
+  COLLEGIATE: COLLEGIATE_API_KAY,
+  COLLEGIATE_THESAURUS: THESAURUS_API_KEY
+} = require('./config')
+const collegiateDict = new CollegiateDictionary((key = COLLEGIATE_API_KAY))
+const learnersDict = new LearnersDictionary((key = LEARNERS_API_KEY))
+const collegiateThes = new CollegiateThesaurus((key = THESAURUS_API_KEY))
 
 function renderDefinition(senses) {
   return senses
@@ -14,17 +23,21 @@ function renderDefinition(senses) {
 <li>
     ${number ? '<strong>' + number + '</strong>' : ''}
     ${meanings && meanings.length ? meanings.join(' ') : ''}
-    ${synonyms && synonyms.length
-      ? synonyms.map(s => '<a>' + s + '</a>').join(', ')
-      : ''}
-    ${illustrations && illustrations.length
-      ? '<ul>' +
-        illustrations.map(i => '<li>' + i + '</li>').join('\n') +
-        '</ul>'
-      : ''}
-    ${senses && senses.length
-      ? '<ol>' + renderDefinition(senses) + '</ol>'
-      : ''}
+    ${
+      synonyms && synonyms.length
+        ? synonyms.map(s => '<a>' + s + '</a>').join(', ')
+        : ''
+    }
+    ${
+      illustrations && illustrations.length
+        ? '<ul>' +
+          illustrations.map(i => '<li>' + i + '</li>').join('\n') +
+          '</ul>'
+        : ''
+    }
+    ${
+      senses && senses.length ? '<ol>' + renderDefinition(senses) + '</ol>' : ''
+    }
 </li>
     `
     )
@@ -48,7 +61,12 @@ function render(definitions) {
 const server = micro(async (req, res) => {
   let url = parseURL(req.url, true)
   let matches = url.pathname.match(/\/word\/(.*)/)
-  let dict = url.query.type === 'learners'? learnersDict: collegiateDict
+  let dict =
+    {
+      learners: learnersDict,
+      collegiate: collegiateDict,
+      thesaurus: collegiateThes
+    }[url.query.type] || collegiateDict
   if (matches) {
     let word = matches[1]
     const definitions = await dict.lookup(word)

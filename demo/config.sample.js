@@ -1,4 +1,5 @@
 module.exports = {
   COLLEGIATE: '',
-  LEARNERS: ''
+  LEARNERS: '',
+  COLLEGIATE_THESAURUS: ''
 }

@@ -1,0 +1,47 @@
+<entry_list version="1.0">
+  <entry id="umpire">
+    <term>
+      <hw>umpire</hw>
+    </term>
+    <fl>noun</fl>
+    <sens>
+      <mc>
+        a person who impartially decides or resolves a dispute or controversy
+      </mc>
+      <vi>
+        usually acts as
+        <it>umpire</it>
+        in the all-too-frequent squabbles between the two other roommates
+      </vi>
+      <syn>adjudicator, arbiter, arbitrator, referee, umpire</syn>
+      <rel>
+        jurist, justice, magistrate; intermediary, intermediate, mediator, mediatrix, moderator, negotiator; conciliator, go-between, peacemaker, reconciler, troubleshooter; decider
+      </rel>
+    </sens>
+  </entry>
+  <entry id="umpire">
+    <term>
+      <hw>umpire</hw>
+    </term>
+    <fl>verb</fl>
+    <sens>
+      <mc>
+        to give an opinion about (something at issue or in dispute)
+      </mc>
+      <vi>
+        in our family disputes regarding the use of our home entertainment system are
+        <it>umpired</it>
+        by Dad
+      </vi>
+      <syn>
+        adjudge, adjudicate, arbitrate, decide, determine, referee, rule (on), settle, umpire
+      </syn>
+      <rel>
+        consider, deem, deliberate, hear, ponder, weigh; size up; mediate, moderate, negotiate; prosecute, try; find (for
+        <it>or</it>
+        against); conclude, resolve; redetermine, rejudge
+      </rel>
+      <near>equivocate, hedge, pussyfoot, skirt</near>
+    </sens>
+  </entry>
+</entry_list>

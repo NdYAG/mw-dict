@@ -1,7 +1,8 @@
 const url = require('url')
-const { CollegiateDictionary, WordNotFoundError } = require('../')
+const { CollegiateDictionary, CollegiateThesaurus, WordNotFoundError } = require('../')
 
 const dict = new CollegiateDictionary('')
+const thesaurus = new CollegiateThesaurus('')
 
 describe('after fetching xml document from dictionaryapi.com', () => {
   it('parses <ew>, <fl>, and <def>', () => {
@@ -102,6 +103,23 @@ describe('etymology', () => {
       let { etymology } = results[0]
       expect(etymology).toContain('Yiddish [beygl,] from Middle High German [*böugel] ring')
       expect(etymology).not.toContain('bow')
+    })
+  })
+})
+
+describe('parsing thesaurus', () => {
+  it('returns core meaning', () => {
+    return thesaurus.lookup('TEST_THESAURUS').then(results => {
+      let { definition } = results[0]
+      let sense = definition[0]
+      expect(sense.meanings).toEqual(['a person who impartially decides or resolves a dispute or controversy'])
+    })
+  })
+  it('returns an array of synonyms', () => {
+    return thesaurus.lookup('TEST_THESAURUS').then(results => {
+      let { definition } = results[0]
+      let sense = definition[0]
+      expect(Array.isArray(sense.synonyms)).toBe(true)
     })
   })
 })
