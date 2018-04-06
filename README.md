@@ -24,10 +24,11 @@ npm install mw-dict
 ## usage
 
 ```js
-import { CollegiateDictionary, LearnersDictionary } from 'mw-dict'
+import { CollegiateDictionary, LearnersDictionary, CollegiateThesaurus } from 'mw-dict'
 
 const dict = new CollegiateDictionary(API_KEY)
 // const dict = new LearnersDictionary(API_KEY)
+// const thesaurus = new CollegiateThesaurus(API_KEY)
 
 dict
   .lookup(QUERY_WORD)
