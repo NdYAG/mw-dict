@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "lib": ["es2015", "es2017"],
+    "removeComments": true,
+    "moduleResolution": "node"
+  }
+}

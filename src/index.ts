@@ -9,10 +9,9 @@
 
    ...And [Merriam-Webster's Collegiate® Thesaurus]'s API
    https://www.dictionaryapi.com/content/products/documentation/thesaurus-tag-description.txt
-   https://www.dictionaryapi.com/content/products/documentation/intermediate-thesaurus-tag-description.txt
 */
 
-const { Dictionary, Thesaurus, WordNotFoundError } = require('./dictionary')
+import { Dictionary, Thesaurus } from './dictionary'
 
 const COLLEGIATE_DICT_URL =
   'http://www.dictionaryapi.com/api/v1/references/collegiate/xml/'
@@ -21,30 +20,25 @@ const LEARNERS_DICT_URL =
 const COLLEGIATE_THESAURUS_URL =
   'https://www.dictionaryapi.com/api/v1/references/thesaurus/xml/'
 
-class CollegiateDictionary extends Dictionary {
+export { WordNotFoundError } from './dictionary'
+
+export class CollegiateDictionary extends Dictionary {
   constructor(key) {
     super(key)
     this.url = COLLEGIATE_DICT_URL
   }
 }
 
-class LearnersDictionary extends Dictionary {
+export class LearnersDictionary extends Dictionary {
   constructor(key) {
     super(key)
     this.url = LEARNERS_DICT_URL
   }
 }
 
-class CollegiateThesaurus extends Thesaurus {
+export class CollegiateThesaurus extends Thesaurus {
   constructor(key) {
     super(key)
     this.url = COLLEGIATE_THESAURUS_URL
   }
-}
-
-module.exports = {
-  WordNotFoundError,
-  CollegiateDictionary,
-  LearnersDictionary,
-  CollegiateThesaurus
 }

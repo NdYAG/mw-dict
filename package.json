@@ -4,6 +4,7 @@
   "main": "lib/index.js",
   "license": "MIT",
   "scripts": {
+    "build": "rm -rf lib && tsc --outDir lib -p . && cp src/*.d.ts lib",
     "test": "jest"
   },
   "dependencies": {

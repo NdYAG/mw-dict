@@ -1,4 +1,4 @@
-[*.{js,scss}]
+[*.{js,ts,scss}]
 charset = utf-8
 indent_style = space
 indent_size = 2
